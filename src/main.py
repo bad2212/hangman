@@ -77,6 +77,16 @@ def handle_letter(words, remove):
         return all_without_most_common_letter(words)
 
 
+def guess_by_instruction(words, letters_to_guess):
+    for (l, b) in letters_to_guess:
+        if b:
+            words = remove_letter(words, l)
+        else:
+            words = all_without_letter(words, l)
+        print(words)
+    return words
+
+# Store words in a dictionary, into lists based on word length
 words = {}
 for word in open("words", "r").readlines():
     word = word[:-1]
@@ -86,62 +96,36 @@ for word in open("words", "r").readlines():
         if set(list(word)) not in words[len(word)]:
             words[len(word)].append((word, set(list(word))))
 
-for i in words.keys():
-    print(str(i) + ": " + str(len(words[i])))
+# Prints how many words exist of each length
+# for i in words.keys():
+#    print(str(i) + ": " + str(len(words[i])))
 
 to_remove = False
-word_length = 6
+word_length = 7
 
 lst = words[word_length]
 
-# t_list = words[word_length]
-# print(t_list)
-#
-# print(most_common_letter(t_list))
-#
-# one_pass = handle_letter(t_list, to_remove)
-#
-# print(one_pass)
-#
-# print(most_common_letter(one_pass))
-#
-# two_pass = handle_letter(one_pass, to_remove)
-#
-# print(two_pass)
-#
-# print(most_common_letter(two_pass))
-#
-# three_pass = handle_letter(two_pass, to_remove)
-#
-# print(three_pass)
-#
-# print(most_common_letter(three_pass))
-#
-# four_pass = handle_letter(three_pass, to_remove)
-#
-# print(four_pass)
-#
-# print(most_common_letter(four_pass))
-#
-# five_pass = handle_letter(four_pass, to_remove)
-#
-# print(five_pass)
-#
-# print(most_common_letter(five_pass))
-#
-# six_pass = handle_letter(five_pass, to_remove)
-#
-# print(six_pass)
-
-
+# One approach to the problem, guessing until there are no words for which a letter hasn't been guessed
 while not all_letters_equal(handle_letter(lst, to_remove)):
     print(lst)
     print(most_common_letter(lst))
     lst = handle_letter(lst, to_remove)
 
-for (a, b) in lst:
+# Print the words remaining before the last guess
+for (a, _) in lst:
     print(a)
 
+# Each tuple represents a guessed letter and whether or not to treat it as correct
+guesses = [('e', False), ('a', False), ('o', True), ('i', False), ('u', True)]
+
+# The list of six letter words
+lst = words[6]
+
+# Update the list of words by making guesses
+lst = guess_by_instruction(lst, guesses)
+
+# Prints the words remaining
+for (a, _) in lst:
+    print(a)
 
 # Todo: Think about letter ordering. Would require moving away from sets and allowing wildcards
-# Todo: Allow for user to input letter guesses and see remaining words
