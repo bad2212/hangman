@@ -11,6 +11,9 @@ For a six letter word, a strong word choice would be _rhythm_. It once again wou
 
 For a seven letter word, a guesser should actually guess the letter **i** after a failed **e**, followed by an **a** and then an **o**. If all four of these fail, the only valid word will be _suburbs_. Other difficult words to find, if the letter **o** can be found but not **eia**, include _thought_, _unknown_, and _conduct_. 
 
+Another complication worth considering is that guessing the most popular letter isn't always the way to go. Instead, guessing a letter than appears in about half of the words may be a better approach. For instance, if you know that 99% of possible words have the letter **e**, guessing the letter **e** might help you if the word you are looking for doesn't have it, but otherwise you aren't getting much new information. Instead, guessing a letter that appears in about 50% of possible words can help you more easily narrow down your options.
+
+Mathematically, we can assume that for any guessed letter _l_, it will appear in k% of the words. If we determine the average percent of the current words that must be considered after _l_ is guessed (assuming every word is equally likely), we will have an average of [(k^2 + (1-k)^2)/2]% of the words remaining. The minimum value of this function is 50%, when _l_ appears in exact
 
 # Potential Further Developments
 The above strategy for selecting a word is a sound one, and will surely annoy plenty of opponents. However, it might not be the best. For instance, the word _rugby_ would be likely be more difficult to guess than the word _lynch_, as there is more than one word that has a **u** but no other vowel. There are 27 of them, actually, including the words _bluff_, _chuck_, _drums_, and _sunny_. 
@@ -21,4 +24,3 @@ Further Developments to this repository should take this into account, and gener
 
 It is worth noting that this is an oversimplificiation, as placement of the letters is a helpful clue for a hangman guesser, as well.
 
-Another complication worth considering is that guessing the most popular letter isn't always the way to go. Instead, guessing a letter than appears in about half of the words may be a better approach. For instance, if you know that 99% of possible words have the letter **e**, guessing the letter **e** might help you if the word you are looking for doesn't have it, but otherwise you aren't getting much new information. Instead, guessing a letter that appears in about 50% of possible words can help you more easily narrow down your options.
